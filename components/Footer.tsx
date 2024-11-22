@@ -4,9 +4,9 @@ import React from "react";
 function Footer() {
   return (
     <footer className="border-t">
-      <div className="container flex flex-col">
-        <div className="py-12 flex flex-wrap justify-between">
-          <div className="flex flex-col gap-y-12 basis-1 sm:basis-1/2 md:basis-1/3">
+      <div className="container mx-auto px-4 flex flex-col">
+        <div className="py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[400px_1fr_1fr] lg:grid-cols-[400px_1fr_1fr_1fr] xl:grid-cols-[500px_1fr_1fr_1fr] gap-y-14">
+          <div className="flex flex-col gap-y-12">
             <p className="font-bold text-2xl">Furniro.</p>
             <p className="text-gray-3">
               400 University Drive Suite 200 Coral Gables,
@@ -60,7 +60,7 @@ function Footer() {
         </div>
         <div className="border-t py-10">
           <p className="text-black">
-            {new Date().getFullYear()} Furniro. All rights reverved
+            {new Date().getFullYear()} Furniro. All rights reserved
           </p>
         </div>
       </div>
