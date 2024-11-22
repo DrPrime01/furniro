@@ -17,6 +17,10 @@ const config: Config = {
           "2xl": "6rem",
         },
       },
+      spacing: {
+        15: "60px",
+        4.5: "18px",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -35,6 +39,7 @@ const config: Config = {
           5: "#666666",
           6: "#F4F5F7",
           7: "#B0B0B0",
+          dark: "#242424",
         },
         red: {
           discount: "#E97171",

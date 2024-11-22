@@ -36,9 +36,12 @@ export default function Home() {
                 className="rounded-[10px]"
               />
             </div>
-            <p className="text-center text-2xl font-semibold text-gray-4">
+            <Link
+              href="/category/dining"
+              className="text-center text-2xl font-semibold text-gray-4"
+            >
               Dining
-            </p>
+            </Link>
           </div>
           <div className="flex flex-col gap-7">
             <div className="relative w-[370px] h-[480px]">
@@ -57,9 +60,12 @@ export default function Home() {
                 className="rounded-[10px]"
               />
             </div>
-            <p className="text-center text-2xl font-semibold text-gray-4">
+            <Link
+              href="/category/living"
+              className="text-center text-2xl font-semibold text-gray-4"
+            >
               Living
-            </p>
+            </Link>
           </div>
           <div className="flex flex-col gap-7">
             <div className="relative w-[370px] h-[480px]">
@@ -78,9 +84,12 @@ export default function Home() {
                 className="rounded-[10px]"
               />
             </div>
-            <p className="text-center text-2xl font-semibold text-gray-4">
+            <Link
+              href="/category/bedroom"
+              className="text-center text-2xl font-semibold text-gray-4"
+            >
               Bedroom
-            </p>
+            </Link>
           </div>
         </div>
       </section>
