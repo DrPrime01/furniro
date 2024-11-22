@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 function ErrorPage() {
   return <div>ErrorPage</div>;

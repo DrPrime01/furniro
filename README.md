@@ -22,4 +22,3 @@ A Fullstack NextJS ecommerce web application for buying and selling furnitures.
 - Next-Auth User Authentication
 - MongoDB for Database (User, Blogs)
 - Sanity CMS for products storage and retrieval by admins
-# furniro
