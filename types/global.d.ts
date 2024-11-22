@@ -11,3 +11,5 @@ declare global {
     isNew?: boolean;
   }
 }
+
+declare module "react-rating-stars-component";

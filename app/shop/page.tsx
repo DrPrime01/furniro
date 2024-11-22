@@ -1,25 +1,14 @@
 import Banner from "@/components/Banner";
+import HeroBanner from "@/components/HeroBanner";
 import Pagination from "@/components/Pagination";
 import ProductList from "@/components/ProductList";
 
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 
 function page() {
   return (
     <div className="flex flex-col">
-      <div className="h-[316px] relative bg-[url('/images/shop-hero.png')] bg-no-repeat flex flex-col items-center justify-center gap-0.5">
-        <Image src="/icons/logo.svg" alt="logo" width={77} height={77} />
-        <h2 className="font-medium text-5xl leading-[4rem] text-black">Shop</h2>
-        <div className="flex items-center gap-x-1.5">
-          <Link href="/" className="text-black font-medium">
-            Home
-          </Link>
-          &gt;
-          <p className="text-black font-light">Shop</p>
-        </div>
-      </div>
+      <HeroBanner name="Shop" />
       <div className="py-6 bg-cream-1">
         <div className="container flex items-center justify-between">
           <div className="flex items-center divide-x gap-x-8">

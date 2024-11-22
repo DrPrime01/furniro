@@ -1,10 +1,10 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 
-function ProductList() {
+function ProductList({ end }: { end?: number }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      {details?.map((detail) => (
+      {details?.slice(0, end || details?.length)?.map((detail) => (
         <ProductCard key={detail.name} {...detail} />
       ))}
     </div>

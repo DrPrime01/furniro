@@ -6,8 +6,8 @@ A Fullstack NextJS ecommerce web application for buying and selling furnitures.
 
 - Home page
   - Hero Section
-  - Range Preview
-  - Products Display
+  - Category (range) Preview
+  - Products Display Preview
   - Mansory Furniture images display
   - CTA
 - Shop (Products Display)

@@ -20,11 +20,13 @@ const config: Config = {
       spacing: {
         15: "60px",
         4.5: "18px",
+        5.5: "22px",
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "#B88E2F",
+        purple: "#816DFA",
         cream: {
           1: "#F9F1E7",
           2: "#FCF8F3",
