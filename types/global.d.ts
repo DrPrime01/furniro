@@ -10,6 +10,23 @@ declare global {
     discount?: number;
     isNew?: boolean;
   }
-}
 
-declare module "react-rating-stars-component";
+  interface InputProps {
+    label: string;
+    id: string;
+    placeholder?: string;
+  }
+
+  interface BlogPreviewProps {
+    slug: string;
+    shortDesc: string;
+    author: {
+      name: string;
+      profileImg?: string;
+    };
+    date: string;
+    category: string;
+    coverImg: string;
+    title: string;
+  }
+}

@@ -1,4 +1,6 @@
 import Banner from "@/components/Banner";
+import Input from "@/components/form/Input";
+import Textarea from "@/components/form/Textarea";
 import HeroBanner from "@/components/HeroBanner";
 import Image from "next/image";
 import React from "react";
@@ -67,51 +69,18 @@ function page() {
           </div>
           <div className="p-6 md:p-14 w-full">
             <form className="flex flex-col gap-y-9">
-              <div className="flex flex-col gap-y-5">
-                <label className="text-sm sm:text-base" htmlFor="name">
-                  Your name
-                </label>
-                <input
-                  name="name"
-                  id="name"
-                  placeholder="John Doe"
-                  className="outline-none w-full max-w-[528.75px] text-gray-3 placeholder:text-gray-3 text-sm px-[30px] py-6 rounded-[10px] border border-gray-3"
-                />
-              </div>
-              <div className="flex flex-col gap-y-5">
-                <label className="text-sm sm:text-base" htmlFor="email">
-                  Email address
-                </label>
-                <input
-                  name="email"
-                  id="email"
-                  placeholder="john@doe.com"
-                  className="outline-none w-full max-w-[528.75px] text-gray-3 placeholder:text-gray-3 text-sm px-[30px] py-6 rounded-[10px] border border-gray-3"
-                />
-              </div>
-              <div className="flex flex-col gap-y-5">
-                <label className="text-sm sm:text-base" htmlFor="subject">
-                  Subject
-                </label>
-                <input
-                  name="subject"
-                  id="subject"
-                  placeholder="Hello"
-                  className="outline-none w-full max-w-[528.75px] text-gray-3 placeholder:text-gray-3 text-sm px-[30px] py-6 rounded-[10px] border border-gray-3"
-                />
-              </div>
-              <div className="flex flex-col gap-y-5">
-                <label className="text-sm sm:text-base" htmlFor="message">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  placeholder="What do you have to say?"
-                  rows={6}
-                  className="outline-none w-full max-w-[528.75px] text-gray-3 placeholder:text-gray-3 text-sm px-[30px] py-6 rounded-[10px] border border-gray-3"
-                />
-              </div>
+              <Input label="Your name" id="name" placeholder="John Doe" />
+              <Input
+                label="Email address"
+                id="email"
+                placeholder="john@doe.com"
+              />
+              <Input label="Subject" id="subject" placeholder="Hello" />
+              <Textarea
+                label="Message"
+                id="message"
+                placeholder="What do you have to say?"
+              />
               <button className="bg-primary text-white py-3.5 px-20 rounded-[5px] md:w-fit">
                 Submit
               </button>

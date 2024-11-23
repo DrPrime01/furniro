@@ -33,12 +33,12 @@ function Navbar() {
           Shop
         </Link>
         <Link
-          href="/about"
+          href="/blog"
           className={`font-medium text-black hover:text-primary px-4 py-2 rounded-md ${
-            pathname === "/about" ? "text-primary" : ""
+            pathname === "/blog" ? "text-primary" : ""
           }`}
         >
-          About
+          Blog
         </Link>
         <Link
           href="/contact"
