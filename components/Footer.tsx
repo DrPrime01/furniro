@@ -22,8 +22,8 @@ function Footer() {
               <Link href="/shop" className="text-black font-medium">
                 Shop
               </Link>
-              <Link href="/about" className="text-black font-medium">
-                About
+              <Link href="/blog" className="text-black font-medium">
+                Blog
               </Link>
               <Link href="/contact" className="text-black font-medium">
                 Contact
