@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -14,9 +14,12 @@ function Hero() {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam,
           quos, nulla doloremque error.
         </p>
-        <button className="mt-12 py-6 px-[4.5rem] text-white font-bold uppercase bg-primary w-fit">
+        <Link
+          href="/shop"
+          className="mt-12 py-6 px-[4.5rem] text-white font-bold uppercase bg-primary w-fit"
+        >
           Buy Now
-        </button>
+        </Link>
       </div>
     </div>
   );
