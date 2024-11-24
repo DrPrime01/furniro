@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Banner() {
   return (
-    <div className="py-20 px-14 flex flex-wrap justify-center lg:grid lg:grid-cols-4 max-lg:gap-14 bg-cream-3">
+    <div className="py-20 px-14 flex flex-col sm:flex-row sm:flex-wrap justify-center lg:grid lg:grid-cols-4 max-lg:gap-14 bg-cream-3">
       <div className="flex gap-2.5">
         <Image src="/icons/trophy.svg" alt="trophy" width={48} height={48} />
         <div className="flex flex-col gap-0.5">

@@ -29,4 +29,16 @@ declare global {
     coverImg: string;
     title: string;
   }
+
+  interface RecentPostsPreviewProps {
+    img: string;
+    title: string;
+    date: string;
+    slug: string;
+  }
+
+  interface SidebarCartProps {
+    closeModal: () => void;
+    openModal: boolean;
+  }
 }

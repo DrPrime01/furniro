@@ -2,13 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import { useState } from "react";
+import SidebarCart from "./SidebarCart";
 
 function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-7 flex items-center justify-between bg-white">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-7 flex items-center justify-between bg-white z-20">
       {/* LOGO */}
       <Link href="/" className="flex items-center gap-x-[5px]">
         <Image src="/icons/logo.svg" alt="logo" width={50} height={32} />
@@ -70,10 +72,14 @@ function Navbar() {
             height={24}
           />
         </button>
-        <button className="p-1">
+        <button className="p-1" onClick={() => setOpenModal(true)}>
           <Image src="/icons/cart.svg" alt="cart" width={24} height={24} />
         </button>
       </div>
+      <SidebarCart
+        openModal={openModal}
+        closeModal={() => setOpenModal(false)}
+      />
     </div>
   );
 }
