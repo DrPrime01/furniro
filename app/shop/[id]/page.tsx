@@ -1,13 +1,38 @@
 import ProductList from "@/components/ProductList";
 import ChevronRight from "@/components/vectors/chevron-right";
 import StarIcon from "@/components/vectors/star-icon";
+import { client, urlFor } from "@/lib/client";
 import { toCurrency } from "@/utils/helpers";
 
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function page() {
+async function page({ params }: { params: { id: string } }) {
+  const { id } = params;
+  const query = `*[_type == "product" && slug == $slug][0]`;
+  const catQuery = `
+    *[_type == "categories" && slug == $slug][0]{
+      name,
+      "products": products[]->{
+        _id,
+        name,
+        images,
+        price,
+        summary,
+        slug
+      }
+    }
+  `;
+  const product = await client.fetch(query, { slug: id });
+  const category = await client.fetch(catQuery, {
+    slug: product?.categorySlug,
+  });
+
+  const categoryProducts = category?.products?.filter(
+    (prod: ProductProps) => prod?._id !== product?._id
+  );
+
   return (
     <div className="flex flex-col">
       <div className="py-8 bg-cream-1">
@@ -27,7 +52,7 @@ function page() {
             </div>
           </div>
           <div className="pl-6">
-            <p className="text-black">Asgaard Sofa</p>
+            <p className="text-black">{product?.name}</p>
           </div>
         </div>
       </div>
@@ -35,46 +60,53 @@ function page() {
         <div className="lg:w-1/2 flex gap-x-6 lg:gap-x-8">
           <div className="flex flex-col gap-y-8">
             <Image
-              src="/images/thumbnail1.png"
+              src={product?.images[0] && urlFor(product?.images[0]).url()}
               alt="thumbnail"
               width={76}
               height={80}
-              className="object-contain bg-cream-1 rounded-[10px] w-[76px] h-20"
+              className="object-cover bg-cream-1 rounded-[10px] w-[76px] h-20"
             />
-            <Image
-              src="/images/thumbnail2.png"
-              alt="thumbnail"
-              width={76}
-              height={80}
-              className="object-contain bg-cream-1 rounded-[10px] w-[76px] h-20"
-            />
-            <Image
-              src="/images/thumbnail3.png"
-              alt="thumbnail"
-              width={76}
-              height={80}
-              className="object-contain bg-cream-1 rounded-[10px] w-[76px] h-20"
-            />
-            <Image
-              src="/images/thumbnail4.png"
-              alt="thumbnail"
-              width={76}
-              height={80}
-              className="object-contain bg-cream-1 rounded-[10px] w-[76px] h-20"
-            />
+
+            {product?.images[1] && (
+              <Image
+                src={urlFor(product?.images[1]).url()}
+                alt="thumbnail"
+                width={76}
+                height={80}
+                className="object-cover bg-cream-1 rounded-[10px] w-[76px] h-20"
+              />
+            )}
+            {product?.images[2] && (
+              <Image
+                src={urlFor(product?.images[2]).url()}
+                alt="thumbnail"
+                width={76}
+                height={80}
+                className="object-cover bg-cream-1 rounded-[10px] w-[76px] h-20"
+              />
+            )}
+            {product?.images[3] && (
+              <Image
+                src={urlFor(product?.images[3]).url()}
+                alt="thumbnail"
+                width={76}
+                height={80}
+                className="object-cover bg-cream-1 rounded-[10px] w-[76px] h-20"
+              />
+            )}
           </div>
           <Image
-            src="/images/asgaard-sofa.png"
+            src={product?.images && urlFor(product?.images[0]).url()}
             alt="main"
             width={423}
             height={500}
-            className="object-contain bg-cream-1 rounded-[10px] w-[423px] h-[500px]"
+            className="object-cover bg-cream-1 rounded-[10px] w-[423px] h-[500px]"
           />
         </div>
         <div className="lg:w-1/2 flex flex-col">
-          <h2 className="text-[42px] text-black">Asgaard sofa</h2>
+          <h2 className="text-[42px] text-black">{product?.name}</h2>
           <p className="font-medium text-2xl text-gray-3 mb-4">
-            {toCurrency(250000)}
+            {toCurrency(product?.price)}
           </p>
           <div className="flex items-center gap-x-4.5 divide-x mb-4.5">
             <div className="flex items-center gap-x-1.5">
@@ -88,11 +120,7 @@ function page() {
               <p className="text-sm text-gray-3">5 Customers Reviews</p>
             </div>
           </div>
-          <p className="text-sm mb-5.5">
-            Setting the bar as one of the loudest speakers in its class, the
-            Kilburn is a compact, stout-hearted hero with a well-balanced audio
-            which boasts a clear midrange and extended highs for a sound.
-          </p>
+          <p className="text-sm mb-5.5">{product?.description}</p>
           <div className="flex flex-col gap-y-3 mb-4.5">
             <h5 className="text-gray-3">Size</h5>
             <div className="flex items-center gap-x-4">
@@ -135,12 +163,14 @@ function page() {
             <div className="flex items-center gap-x-3">
               <p className="w-[75px] text-sm text-gray-3">Category</p>
               <p>:</p>
-              <p className="text-sm text-gray-3">Sofa</p>
+              <Link href={`/category/${product?.categorySlug}`}>
+                <p className="text-sm text-gray-3">{product?.categoryName}</p>
+              </Link>
             </div>
             <div className="flex items-center gap-x-3">
-              <p className="w-[75px] text-sm text-gray-3">Tags</p>
+              <p className="w-[75px] text-sm text-gray-3">Features</p>
               <p>:</p>
-              <p className="text-sm text-gray-3">Sofa, Chair, Home, Shop</p>
+              <p className="text-sm text-gray-3">{product?.summary}</p>
             </div>
             <div className="flex items-center gap-x-3">
               <p className="w-[75px] text-sm text-gray-3">Share</p>
@@ -174,37 +204,39 @@ function page() {
           <h3 className="text-2xl text-gray-3 font-medium">Reviews [5]</h3>
         </div>
         <div className="flex flex-col gap-y-7">
-          <p className="text-gray-3">
-            Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn
-            portable active stereo speaker takes the unmistakable look and sound
-            of Marshall, unplugs the chords, and takes the show on the road.
-          </p>
-          <p className="text-gray-3">
-            Weighing in under 7 pounds, the Kilburn is a lightweight piece of
-            vintage styled engineering. Setting the bar as one of the loudest
-            speakers in its class, the Kilburn is a compact, stout-hearted hero
-            with a well-balanced audio which boasts a clear midrange and
-            extended highs for a sound that is both articulate and pronounced.
-            The analogue knobs allow you to fine tune the controls to your
-            personal preferences while the guitar-influenced leather strap
-            enables easy and stylish travel.
-          </p>
+          <p className="text-gray-3">{product?.description}</p>
+          {product?.description2 && (
+            <p className="text-gray-3">
+              Weighing in under 7 pounds, the Kilburn is a lightweight piece of
+              vintage styled engineering. Setting the bar as one of the loudest
+              speakers in its class, the Kilburn is a compact, stout-hearted
+              hero with a well-balanced audio which boasts a clear midrange and
+              extended highs for a sound that is both articulate and pronounced.
+              The analogue knobs allow you to fine tune the controls to your
+              personal preferences while the guitar-influenced leather strap
+              enables easy and stylish travel.
+            </p>
+          )}
         </div>
         <div className="flex flex-col md:flex-row items-center gap-5 mt-9">
-          <Image
-            src="/images/cloud-sofa1.png"
-            alt="chair"
-            height={348}
-            width={605}
-            className="object-contain bg-cream-1 h-[348px] rounded-[10px]"
-          />
-          <Image
-            src="/images/cloud-sofa2.png"
-            alt="chair"
-            height={348}
-            width={605}
-            className="object-contain bg-cream-1 h-[348px] rounded-[10px]"
-          />
+          {product?.images[1] && (
+            <Image
+              src={urlFor(product?.images[1]).url()}
+              alt="chair"
+              height={348}
+              width={605}
+              className="object-cover bg-cream-1 h-[348px] rounded-[10px]"
+            />
+          )}
+          {product?.images[2] && (
+            <Image
+              src={urlFor(product?.images[2]).url()}
+              alt="chair"
+              height={348}
+              width={605}
+              className="object-cover bg-cream-1 h-[348px] rounded-[10px]"
+            />
+          )}
         </div>
       </div>
       <hr />
@@ -212,7 +244,13 @@ function page() {
         <h2 className="text-gray-4 text-[2rem] font-bold text-center self-center mb-6">
           Related Products
         </h2>
-        <ProductList end={4} />
+        {categoryProducts.length > 0 ? (
+          <ProductList products={categoryProducts} end={4} />
+        ) : (
+          <p className="text-lg md:text-xl font-semibold">
+            No similar products available
+          </p>
+        )}
         <div className="flex justify-center mt-11">
           <Link
             href="/shop"

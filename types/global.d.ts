@@ -1,3 +1,5 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
 export {};
 
 declare global {
@@ -40,5 +42,25 @@ declare global {
   interface SidebarCartProps {
     closeModal: () => void;
     openModal: boolean;
+  }
+
+  interface CategoryProps {
+    _id: string;
+    name: string;
+    slug: string;
+    _createdAt: string;
+    coverImage: SanityImageSource[];
+    products: unknown[];
+  }
+
+  interface ProductProps {
+    images: SanityImageSource[];
+    description: string;
+    summary: string;
+    category: CategoryProps[];
+    slug: string;
+    price: number;
+    name: string;
+    _id: string;
   }
 }

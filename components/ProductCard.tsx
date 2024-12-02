@@ -9,10 +9,10 @@ import Link from "next/link";
 function ProductCard(props: ProductCard) {
   const { name, img, desc, discount, originalPrice, isNew, slug } = props;
   const discountedPrice =
-    discount && Math.floor((discount / 100) * originalPrice);
+    discount && originalPrice - Math.floor((discount / 100) * originalPrice);
   return (
-    <div className="relative">
-      <div className="absolute inset-0 bg-gray-1 flex flex-col justify-center gap-6 px-4 z-10 opacity-0 hover:opacity-[72%] transition-opacity duration-150 ease-linear cursor-pointer">
+    <div className="relative w-full">
+      <div className="absolute hidden size-full inset-0 bg-gray-1 sm:flex flex-col justify-center gap-6 px-4 z-10 opacity-0 hover:opacity-[72%] transition-opacity duration-150 ease-linear cursor-pointer">
         <button className="self-center w-[202px] py-3 font-semibold text-primary bg-white">
           Add to cart
         </button>
@@ -34,15 +34,15 @@ function ProductCard(props: ProductCard) {
           </button>
         </div>
       </div>
-      <div className=" bg-white flex flex-col relative">
+      <div className="w-full bg-white flex flex-col relative h-full">
         <Image
           src={img}
           alt={name}
           width={285}
           height={301}
-          className="object-cover"
+          className="object-cover w-full h-[301px]"
         />
-        <div className="bg-gray-6 p-4 pb-7 flex flex-col gap-y-2">
+        <div className="bg-gray-6 p-4 pb-7 flex flex-col flex-grow gap-y-2">
           <h4 className="font-semibold text-2xl text-gray-1">{name}</h4>
           <p className="font-medium text-gray-2">{desc}</p>
           <div className="flex items-center justify-between gap-x-4">

@@ -1,9 +1,16 @@
 import Hero from "@/components/Hero";
 import ProductList from "@/components/ProductList";
+import { client, urlFor } from "@/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const catQuery = `*[_type=="categories"]`;
+  const prodQuery = `*[_type=="product"]`;
+
+  const categories = await client.fetch(catQuery);
+  const products = await client.fetch(prodQuery);
+
   return (
     <main>
       <section>
@@ -18,86 +25,46 @@ export default function Home() {
             Lorem ipsum dolor, sit amet consectetur adipisicing elit
           </p>
         </div>
-        <div className="flex flex-wrap gap-5">
-          <div className="flex flex-col gap-7">
-            <div className="relative w-[370px] h-[480px]">
-              <Image
-                src="/images/dining1.png"
-                alt="dining"
-                fill
-                sizes="30%"
-                className="z-10 hover:opacity-0 transition-opacity duration-150 ease-linear rounded-[10px] cursor-pointer"
-              />
-              <Image
-                src="/images/dining2.png"
-                alt="dining"
-                fill
-                sizes="30%"
-                className="rounded-[10px]"
-              />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {categories?.map((category: CategoryProps) => (
+            <div key={category?._id} className="flex flex-col gap-7">
+              <div className="relative xl:min-w-[370px] h-[480px]">
+                <Image
+                  src={
+                    category?.coverImage &&
+                    urlFor(category?.coverImage[0]).url()
+                  }
+                  alt="dining"
+                  fill
+                  sizes="30%"
+                  className="z-10 hover:opacity-0 transition-opacity duration-150 ease-linear rounded-[10px] cursor-pointer"
+                />
+                <Image
+                  src={
+                    category?.coverImage &&
+                    urlFor(category?.coverImage[1]).url()
+                  }
+                  alt="dining"
+                  fill
+                  sizes="30%"
+                  className="rounded-[10px]"
+                />
+              </div>
+              <Link
+                href={`/category/${category?.slug}`}
+                className="text-center text-2xl font-semibold text-gray-4"
+              >
+                {category?.name}
+              </Link>
             </div>
-            <Link
-              href="/category/dining"
-              className="text-center text-2xl font-semibold text-gray-4"
-            >
-              Dining
-            </Link>
-          </div>
-          <div className="flex flex-col gap-7">
-            <div className="relative w-[370px] h-[480px]">
-              <Image
-                src="/images/living1.png"
-                alt="living"
-                fill
-                sizes="30%"
-                className="z-10 hover:opacity-0 transition-opacity duration-150 ease-linear rounded-[10px] cursor-pointer"
-              />
-              <Image
-                src="/images/living2.png"
-                alt="dining"
-                fill
-                sizes="30%"
-                className="rounded-[10px]"
-              />
-            </div>
-            <Link
-              href="/category/living"
-              className="text-center text-2xl font-semibold text-gray-4"
-            >
-              Living
-            </Link>
-          </div>
-          <div className="flex flex-col gap-7">
-            <div className="relative w-[370px] h-[480px]">
-              <Image
-                src="/images/bedroom1.png"
-                alt="bedroom"
-                fill
-                sizes="30%"
-                className="z-10 hover:opacity-0 transition-opacity duration-150 ease-linear rounded-[10px] cursor-pointer"
-              />
-              <Image
-                src="/images/bedroom2.png"
-                alt="dining"
-                fill
-                sizes="30%"
-                className="rounded-[10px]"
-              />
-            </div>
-            <Link
-              href="/category/bedroom"
-              className="text-center text-2xl font-semibold text-gray-4"
-            >
-              Bedroom
-            </Link>
-          </div>
+          ))}
         </div>
       </section>
       <section className="container py-14 flex flex-col gap-y-8">
         <h2 className="text-gray-4 text-[2rem] font-bold text-center self-center">
           Our Products
         </h2>
-        <ProductList />
+        <ProductList products={products} end={8} />
         <div className="flex justify-center">
           <Link
             href="/shop"
