@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function Hero() {
   return (
-    <div className="min-h-[calc(100vh_-_100px)] bg-[url('/images/hero.png')] bg-cover bg-no-repeat flex items-center justify-end px-14">
+    <div className="min-h-[calc(100vh_-_250px)] md:min-h-[calc(100vh_-_100px)] bg-[url('/images/hero.png')] bg-cover bg-no-repeat flex items-center justify-end px-14">
       <div className="rounded-[10px] bg-cream-4 pt-16 pb-9 px-10 flex flex-col h-fit max-w-[643px]">
         <p className="mb-1 font-semibold text-gray-4 tracking-wide">
           New Arrival

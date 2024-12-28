@@ -10,7 +10,7 @@ import React from "react";
 
 async function page({ params }: { params: { id: string } }) {
   const { id } = params;
-  const query = `*[_type == "product" && slug == $slug][0]`;
+  const query = `*[_type == "product" && slug.current == $slug][0]`;
   const catQuery = `
     *[_type == "categories" && slug == $slug][0]{
       name,
@@ -25,9 +25,13 @@ async function page({ params }: { params: { id: string } }) {
     }
   `;
   const product = await client.fetch(query, { slug: id });
-  const category = await client.fetch(catQuery, {
-    slug: product?.categorySlug,
-  });
+  const category = await client.fetch(
+    catQuery,
+    {
+      slug: product?.categorySlug,
+    },
+    { next: { revalidate: 60 } }
+  );
 
   const categoryProducts = category?.products?.filter(
     (prod: ProductProps) => prod?._id !== product?._id

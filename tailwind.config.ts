@@ -51,6 +51,40 @@ const config: Config = {
           new: "#2EC1AC",
         },
       },
+      animation: {
+        "slide-in": "slide-in 500ms ease-in",
+        "slide-out": "slide-out 500ms ease-in",
+        "slide-in-left": "slide-in-left 300ms ease-in",
+        "slide-out-left": "slide-out-left 300ms ease-in",
+        "slide-down": "slide-down 300ms ease-in",
+        "slide-up": "slide-up 300ms ease-in",
+      },
+      keyframes: {
+        "slide-in": {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        "slide-out": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        "slide-in-left": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        "slide-out-left": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        "slide-down": {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0%)" },
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(-100%)" },
+        },
+      },
     },
   },
   plugins: [],

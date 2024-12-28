@@ -21,7 +21,7 @@ export default async function Home() {
           <h2 className="text-gray-4 text-[2rem] font-bold">
             Browse The Range
           </h2>
-          <p className="text-xl text-gray-5">
+          <p className="text-xl text-gray-5 text-center md:text-left">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit
           </p>
         </div>
@@ -51,7 +51,7 @@ export default async function Home() {
                 />
               </div>
               <Link
-                href={`/category/${category?.slug}`}
+                href={`/category/${category?.slug?.current}`}
                 className="text-center text-2xl font-semibold text-gray-4"
               >
                 {category?.name}

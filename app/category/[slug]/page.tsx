@@ -19,7 +19,11 @@ async function page({ params }: { params: { slug: string } }) {
       }
     }
   `;
-  const category = await client.fetch(query, { slug });
+  const category = await client.fetch(
+    query,
+    { slug },
+    { next: { revalidate: 60 } }
+  );
 
   return (
     <div className="flex flex-col">

@@ -6,7 +6,11 @@ import Link from "next/link";
 
 async function page() {
   const catQuery = `*[_type=="categories"]`;
-  const categories = await client.fetch(catQuery);
+  const categories = await client.fetch(
+    catQuery,
+    {},
+    { next: { revalidate: 60 } }
+  );
 
   return (
     <div className="flex flex-col">
@@ -35,7 +39,7 @@ async function page() {
               />
             </div>
             <Link
-              href={`/category/${category?.slug}`}
+              href={`/category/${category?.slug?.current}`}
               className="text-center text-2xl font-semibold text-gray-4"
             >
               {category?.name}

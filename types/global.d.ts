@@ -3,8 +3,10 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 export {};
 
 declare global {
+  type SlugType = { current: string; _type: "slug" };
+
   interface ProductCard {
-    slug: string;
+    slug: SlugType;
     img: string;
     name: string;
     desc: string;
@@ -47,7 +49,7 @@ declare global {
   interface CategoryProps {
     _id: string;
     name: string;
-    slug: string;
+    slug: SlugType;
     _createdAt: string;
     coverImage: SanityImageSource[];
     products: unknown[];
@@ -58,7 +60,7 @@ declare global {
     description: string;
     summary: string;
     category: CategoryProps[];
-    slug: string;
+    slug: SlugType;
     price: number;
     name: string;
     _id: string;

@@ -26,8 +26,19 @@ export default defineType({
     defineField({
       name: "slug",
       title: "Slug",
-      type: "string",
-      validation: (Rule) => Rule.max(50).warning("Max length is 50 characters"),
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "name",
+        maxLength: 96,
+        slugify: (input) =>
+          input
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-")
+            .slice(0, 96),
+      },
     }),
     defineField({
       name: "price",

@@ -12,8 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Furniro",
-  description:
-    "State of the art ecommerce web application for your furniture needs",
+  description: "State of the art shop for your furniture needs",
 };
 
 export default function RootLayout({

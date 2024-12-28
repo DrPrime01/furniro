@@ -1,4 +1,3 @@
-import React from "react";
 import ShareIcon from "./vectors/share-icon";
 import CompareIcon from "./vectors/compare-icon";
 import LikeIcon from "./vectors/like-icon";
@@ -22,7 +21,7 @@ function ProductCard(props: ProductCard) {
             Share
           </button>
           <Link
-            href={`/shop/${slug}`}
+            href={`/shop/${slug?.current}`}
             className="flex items-center gap-x-0.5 text-white font-semibold"
           >
             <CompareIcon />
@@ -43,7 +42,9 @@ function ProductCard(props: ProductCard) {
           className="object-cover w-full h-[301px]"
         />
         <div className="bg-gray-6 p-4 pb-7 flex flex-col flex-grow gap-y-2">
-          <h4 className="font-semibold text-2xl text-gray-1">{name}</h4>
+          <Link href={`/shop/${slug?.current}`}>
+            <h4 className="font-semibold text-2xl text-gray-1">{name}</h4>
+          </Link>
           <p className="font-medium text-gray-2">{desc}</p>
           <div className="flex items-center justify-between gap-x-4">
             <p className="text-xl font-semibold text-gray-1">
