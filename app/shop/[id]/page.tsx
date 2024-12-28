@@ -64,7 +64,7 @@ async function page({ params }: { params: { id: string } }) {
       </div>
       <div className="container pt-9 pb-14 flex flex-col lg:flex-row gap-y-10 lg:gap-x-16 xl:gap-x-20">
         <div className="lg:w-1/2 flex flex-col-reverse gap-y-5 md:flex-row gap-x-6 lg:gap-x-8">
-          <div className="flex justify-between md:flex-col gap-y-8">
+          <div className="flex max-sm:justify-between md:flex-col gap-y-8">
             <Image
               src={product?.images[0] && urlFor(product?.images[0]).url()}
               alt="thumbnail"
@@ -204,7 +204,7 @@ async function page({ params }: { params: { id: string } }) {
       </div>
       <hr />
       <div className="pt-12 pb-16 container flex flex-col">
-        <div className="self-center flex items-center gap-x-14 mb-9 overflow-x-auto w-screen max-md:px-5 scrollbar-hide">
+        <div className="self-center flex items-center gap-x-14 mb-9 overflow-x-auto w-full scrollbar-hide">
           <h3 className="text-lg md:text-2xl text-black font-medium text-nowrap">
             Description
           </h3>
