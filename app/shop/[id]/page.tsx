@@ -39,7 +39,7 @@ async function page({ params }: { params: { id: string } }) {
 
   return (
     <div className="flex flex-col">
-      <div className="py-8 bg-cream-1">
+      <div className="py-6 md:py-8 bg-cream-1">
         <div className="container flex items-center gap-x-6 divide-x">
           <div className="flex items-center gap-x-6">
             <div className="flex items-center gap-x-3.5">
@@ -56,13 +56,15 @@ async function page({ params }: { params: { id: string } }) {
             </div>
           </div>
           <div className="pl-6">
-            <p className="text-black">{product?.name}</p>
+            <p className="text-black truncate max-md:max-w-20">
+              {product?.name}
+            </p>
           </div>
         </div>
       </div>
       <div className="container pt-9 pb-14 flex flex-col lg:flex-row gap-y-10 lg:gap-x-16 xl:gap-x-20">
-        <div className="lg:w-1/2 flex gap-x-6 lg:gap-x-8">
-          <div className="flex flex-col gap-y-8">
+        <div className="lg:w-1/2 flex flex-col-reverse gap-y-5 md:flex-row gap-x-6 lg:gap-x-8">
+          <div className="flex justify-between md:flex-col gap-y-8">
             <Image
               src={product?.images[0] && urlFor(product?.images[0]).url()}
               alt="thumbnail"
@@ -108,7 +110,9 @@ async function page({ params }: { params: { id: string } }) {
           />
         </div>
         <div className="lg:w-1/2 flex flex-col">
-          <h2 className="text-[42px] text-black">{product?.name}</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-[42px] text-black mb-2">
+            {product?.name}
+          </h2>
           <p className="font-medium text-2xl text-gray-3 mb-4">
             {toCurrency(product?.price)}
           </p>
@@ -200,12 +204,16 @@ async function page({ params }: { params: { id: string } }) {
       </div>
       <hr />
       <div className="pt-12 pb-16 container flex flex-col">
-        <div className="self-center flex items-center gap-x-14 mb-9">
-          <h3 className="text-2xl text-black font-medium">Description</h3>
-          <h3 className="text-2xl text-gray-3 font-medium">
+        <div className="self-center flex items-center gap-x-14 mb-9 overflow-x-auto w-screen max-md:px-5 scrollbar-hide">
+          <h3 className="text-lg md:text-2xl text-black font-medium text-nowrap">
+            Description
+          </h3>
+          <h3 className="text-lg md:text-2xl text-gray-3 font-medium text-nowrap">
             Additional Information
           </h3>
-          <h3 className="text-2xl text-gray-3 font-medium">Reviews [5]</h3>
+          <h3 className="text-lg md:text-2xl text-gray-3 font-medium text-nowrap">
+            Reviews [5]
+          </h3>
         </div>
         <div className="flex flex-col gap-y-7">
           <p className="text-gray-3">{product?.description}</p>
@@ -248,7 +256,7 @@ async function page({ params }: { params: { id: string } }) {
         <h2 className="text-gray-4 text-[2rem] font-bold text-center self-center mb-6">
           Related Products
         </h2>
-        {categoryProducts.length > 0 ? (
+        {categoryProducts?.length > 0 ? (
           <ProductList products={categoryProducts} end={4} />
         ) : (
           <p className="text-lg md:text-xl font-semibold">
