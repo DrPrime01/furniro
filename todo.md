@@ -6,3 +6,4 @@
 - Implement cart
 - Implement auth
 - Implement blog
+- Implement wishlist
